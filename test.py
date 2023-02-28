@@ -13,8 +13,16 @@ data_types = [
     ('ipv6_address', 5),
     ('computer_login', 5),
     ('dns_name', 5),
-    ('text', 65),
+    ('dns_srv', 5),
+    ('text', 60),
 ]
+
+def generate_srv_dns():
+    priority = random.randint(0, 100)
+    weight = random.randint(0, 100)
+    port = random.randint(0, 65535)
+    target = faker.domain_name()
+    return f"_service._proto IN SRV {priority} {weight} {port} {target}"
 
 def generate_message(data_type):
     if data_type == 'email':
@@ -31,6 +39,8 @@ def generate_message(data_type):
         return faker.user_name()
     elif data_type == 'dns_name':
         return faker.domain_name()   
+    elif data_type == 'dns_srv':
+        return generate_srv_dns()
     elif data_type == 'text':
         return faker.text() * 500
 
