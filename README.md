@@ -1,6 +1,11 @@
 # ds-test
 This repository is used to generate test files for DataSurgeon
 
+# Setup
+```
+pip install Faker
+```
+
 # Arguments
 ```
 python3 ~/test.py -h                                                                                                                                                                                                             130 ⨯
