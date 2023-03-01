@@ -1,9 +1,12 @@
 import os
 import random
+import hashlib
 import argparse
 from faker import Faker
 
 faker = Faker()
+
+supported_hashes = ["md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "md4"]
 
 data_types = [
     ('email', 5),
@@ -14,7 +17,8 @@ data_types = [
     ('computer_login', 5),
     ('dns_name', 5),
     ('dns_srv', 5),
-    ('text', 60),
+    ('hash', 5),
+    ('text', 55),
 ]
 
 def generate_srv_dns():
@@ -46,6 +50,8 @@ def generate_message(data_type):
         return generate_srv_dns()
     elif data_type == 'text':
         return faker.text() * 500
+    elif data_type == 'hash':
+        return hashlib.new(random.choice(supported_hashes)).hexdigest()
 
 def generate_test_file(output, size, speed):
     total_file_size = size * 1024
