@@ -36,7 +36,10 @@ def generate_message(data_type):
     elif data_type == 'ipv6_address':
         return faker.ipv6()
     elif data_type == 'computer_login':
-        return faker.user_name()
+        username = faker.first_name()
+        if random.choice([True, False]):
+            username += "." + faker.last_name()
+        return f"{username}@{faker.domain_name()}"
     elif data_type == 'dns_name':
         return faker.domain_name()   
     elif data_type == 'dns_srv':
