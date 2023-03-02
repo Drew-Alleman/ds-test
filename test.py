@@ -19,8 +19,10 @@ data_types = [
     ('dns_srv', 4),
     ('hash', 4),
     ('text', 40),
-    ('phone_number', 4), # added phone_number
+    ('phone_number', 4),
+    ('ssn', 4), # new data type
 ]
+
 
 def generate_srv_dns():
     priority = random.randint(0, 100)
@@ -53,8 +55,10 @@ def generate_message(data_type):
         return faker.text() * 500
     elif data_type == 'hash':
         return hashlib.new(random.choice(supported_hashes)).hexdigest()
-    elif data_type == 'phone_number': # added phone_number case
+    elif data_type == 'phone_number':
         return faker.phone_number()
+    elif data_type == 'ssn': # new case for generating SSNs
+        return faker.ssn()
 
 def generate_test_file(output, size, speed):
     total_file_size = size * 1024
