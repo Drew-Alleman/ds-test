@@ -9,16 +9,17 @@ faker = Faker()
 supported_hashes = ["md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "md4"]
 
 data_types = [
-    ('email', 5),
-    ('credit_card', 5),
-    ('mac_address', 5),
-    ('ip_address', 5),
-    ('ipv6_address', 5),
-    ('computer_login', 5),
-    ('dns_name', 5),
-    ('dns_srv', 5),
-    ('hash', 5),
-    ('text', 55),
+    ('email', 4),
+    ('credit_card', 4),
+    ('mac_address', 4),
+    ('ip_address', 4),
+    ('ipv6_address', 4),
+    ('computer_login', 4),
+    ('dns_name', 4),
+    ('dns_srv', 4),
+    ('hash', 4),
+    ('text', 40),
+    ('phone_number', 4), # added phone_number
 ]
 
 def generate_srv_dns():
@@ -52,6 +53,8 @@ def generate_message(data_type):
         return faker.text() * 500
     elif data_type == 'hash':
         return hashlib.new(random.choice(supported_hashes)).hexdigest()
+    elif data_type == 'phone_number': # added phone_number case
+        return faker.phone_number()
 
 def generate_test_file(output, size, speed):
     total_file_size = size * 1024
