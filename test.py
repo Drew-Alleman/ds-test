@@ -3,6 +3,8 @@ import random
 import hashlib
 import argparse
 from faker import Faker
+import secrets
+import base64
 
 faker = Faker()
 
@@ -18,9 +20,10 @@ data_types = [
     ('dns_name', 4),
     ('dns_srv', 4),
     ('hash', 4),
-    ('text', 40),
+    ('text', 36),
     ('phone_number', 4),
     ('ssn', 4), # new data type
+    ('base', 4), # new data type
 ]
 
 
@@ -59,6 +62,9 @@ def generate_message(data_type):
         return faker.phone_number()
     elif data_type == 'ssn': # new case for generating SSNs
         return faker.ssn()
+    elif data_type == "base":
+        rand_bytes = secrets.token_bytes(10)
+        return base64.b64encode(rand_bytes).decode('utf-8')
 
 def generate_test_file(output, size, speed):
     total_file_size = size * 1024
